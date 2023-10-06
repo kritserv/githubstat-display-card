@@ -5,13 +5,13 @@ from function.create_graphic import DrawSVG
 
 app = Flask(__name__)
 
-flaskusr = '' # Your Github Username
-token = '' # Your Github Token
-
-CreateNewTable()
+CreateNewTable() # Create Database if not already exists
 
 @app.route('/')
 def github_stats():
+
+	flaskusr = '' # Your Github Username
+	token = '' # Your Github Token
 
 	username = request.args.get('username')
 	theme = request.args.get('theme')
