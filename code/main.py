@@ -7,25 +7,44 @@ app = Flask(__name__)
 
 CreateNewTable() # Create Database if not already exists
 
-@app.route('/')
-def github_stats():
+@app.route('/api/')
+def StatsAPI():
 
-	flaskusr = '' # Your Github Username
-	token = '' # Your Github Token
+	username = request.args.get('username')
+
+	if username:
+
+		query_in_db = QueryFromSQLite(username)
+
+		if query_in_db == None: InsertApiData(username)
+
+		context = GetSQLiteData(username)
+
+		return (context)
+
+	else:
+		return {'username': username}
+
+@app.route('/')
+def StatsView():
 
 	username = request.args.get('username')
 	theme = request.args.get('theme')
 
-	context = {}
+	if username:
 
-	query_in_db = QueryFromSQLite(username)
+		query_in_db = QueryFromSQLite(username)
 
-	if query_in_db == None: InsertApiData(username,flaskusr, token)
+		if query_in_db == None: InsertApiData(username)
 
-	context = GetSQLiteData(username)
-	context['theme'] = theme
+		context = GetSQLiteData(username)
+		if theme == None: theme = "default"
+		context['theme'] = theme
 
-	return DrawSVG(context)
+		return DrawSVG(context)
+
+	else:
+		return {'username': username, 'theme': theme}, 201
 
 if __name__ == '__main__':
 	app.run(debug=True)
