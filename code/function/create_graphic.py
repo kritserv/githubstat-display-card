@@ -2,7 +2,7 @@ import svgwrite
 
 def DrawSVG(context):
 
-	display_text = ['Image', 'URL', 'Hireable', 'Total Stars', 'Total Commits', 'Total PR']
+	display_text = ['Image', 'Last yr Contrib', 'Total Stars', 'Language']
 
 	dwg = svgwrite.Drawing('github_stats.svg', profile='tiny')
 

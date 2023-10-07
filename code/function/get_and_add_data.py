@@ -6,15 +6,15 @@ con = sqlite3.connect("requested_data.sqlite", check_same_thread=False)
 cur = con.cursor()
 
 def CreateNewTable():
-	cur.execute("CREATE TABLE IF NOT EXISTS saved_profile(username, profile_img, last_year_contrib, total_stars, used_language_count_dict)")
+	cur.execute("CREATE TABLE IF NOT EXISTS saved_profile(usr, image, contrib, all_stars, all_lang)")
 
 def QueryFromSQLite(username):
-	return cur.execute(f"SELECT * FROM saved_profile WHERE login='{username}'").fetchone()
+	return cur.execute(f"SELECT * FROM saved_profile WHERE usr='{username}'").fetchone()
 
 def GetSQLiteData(username):
 	context = {}
 	query = QueryFromSQLite(username)
-	context['username'], context['profile_img'], context['last_year_contrib'], context['total_stars'], context['used_language_count_dict'] = query
+	context['username'], context['image'], context['contrib'], context['all_stars'], context['all_lang'] = query
 
 	return context
 
@@ -61,7 +61,13 @@ def InsertApiData(username):
 
 					else:
 						repo_soup = BeautifulSoup(repo_url_response.content, "html.parser")
-						total_stars += int(repo_soup.find(id="repo-stars-counter-star").text)
+						repo_star = repo_soup.find(id="repo-stars-counter-star").text
+						if 'k' in repo_star:
+							repo_star = repo_star[0:-1]
+							repo_star = float(repo_star)*1000
+						else:
+							repo_star = float(repo_star)
+						total_stars += repo_star
 						for used_language_elem in repo_soup.find_all("a", class_="d-inline-flex"):
 							language, amount = used_language_elem.find_all("span")
 							try:
@@ -73,34 +79,16 @@ def InsertApiData(username):
 
 				i+=1
 
+			if total_stars > 999:
+				total_stars = str(round(total_stars/1000, 2)) + 'k'
 			for language in used_language_count_dict:
 				used_language_count_dict[language] = str(round(used_language_count_dict[language]/total_amounts*100, 2))
 
-		try:
-			cur.execute("""
-				INSERT INTO saved_profile(username, profile_img, last_year_contrib, total_stars, used_language_count_dict) 
-				VALUES (?, ?, ?, ?, ?);
-				""", 
-				(
-					username, 
-					profile_img, 
-					last_year_contrib, 
-					total_stars,
-					used_language_count_dict
-					)
-				)
-		except:
-			cur.execute("""
-				INSERT INTO saved_profile(username, profile_img, last_year_contrib, total_stars, used_language_count_dict) 
-				VALUES (?, ?, ?, ?, ?);
-				""", 
-				(
-					username, 
-					'', 
-					'', 
-					'',
-					''
-					)
-				)
+			try:
+				cur.execute("INSERT INTO saved_profile VALUES (?, ?, ?, ?, ?)", (username, profile_img, last_year_contrib, total_stars, str(used_language_count_dict)))
+			
+			except:
+				cur.execute("INSERT INTO saved_profile VALUES (?, ?, ?, ?, ?)", (username, '', '', '' ,''))
 
-		con.commit()
+
+			con.commit()
