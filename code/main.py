@@ -7,24 +7,6 @@ app = Flask(__name__)
 
 CreateNewTable() # Create Database if not already exists
 
-@app.route('/api/')
-def StatsAPI():
-
-	username = request.args.get('username')
-
-	if username:
-
-		query_in_db = QueryFromSQLite(username)
-
-		if query_in_db == None: InsertApiData(username)
-
-		context = GetSQLiteData(username)
-
-		return (context)
-
-	else:
-		return {'username': username}, 201
-
 @app.route('/')
 def StatsView():
 
