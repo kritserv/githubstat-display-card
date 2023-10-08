@@ -23,7 +23,7 @@ def StatsAPI():
 		return (context)
 
 	else:
-		return {'username': username}
+		return {'username': username}, 201
 
 @app.route('/')
 def StatsView():
