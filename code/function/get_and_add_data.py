@@ -18,7 +18,7 @@ def GetSQLiteData(username):
 
 	return context
 
-def InsertApiData(username):
+def ScrapDataFromGithub(username):
 
 	url = "https://github.com"
 	response = requests.get(f'{url}/{username}')
@@ -84,11 +84,13 @@ def InsertApiData(username):
 			for language in used_language_count_dict:
 				used_language_count_dict[language] = str(round(used_language_count_dict[language]/total_amounts*100, 2))
 
-			try:
-				cur.execute("INSERT INTO saved_profile VALUES (?, ?, ?, ?, ?)", (username, profile_img, last_year_contrib, total_stars, str(used_language_count_dict)))
-			
-			except:
-				cur.execute("INSERT INTO saved_profile VALUES (?, ?, ?, ?, ?)", (username, '', '', '' ,''))
+			return (username, profile_img, last_year_contrib, total_stars, str(used_language_count_dict))
 
+def AddNewDataToSQLite(username, newdata):
+	try:
+		cur.execute("INSERT INTO saved_profile VALUES (?, ?, ?, ?, ?)", newdata)
 
-			con.commit()
+	except:
+		cur.execute("INSERT INTO saved_profile VALUES (?, ?, ?, ?, ?)", (username, '', '', '' ,''))
+
+	con.commit()

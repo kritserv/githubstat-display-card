@@ -1,6 +1,6 @@
 from flask import Flask, request
 
-from function.get_and_add_data import CreateNewTable, QueryFromSQLite, GetSQLiteData, InsertApiData
+from function.get_and_add_data import CreateNewTable, QueryFromSQLite, GetSQLiteData, ScrapDataFromGithub, AddNewDataToSQLite
 from function.create_graphic import DrawSVG
 
 app = Flask(__name__)
@@ -15,9 +15,12 @@ def StatsView():
 
 	if username:
 
-		query_in_db = QueryFromSQLite(username)
+		userdata_in_db = QueryFromSQLite(username)
 
-		if query_in_db == None: InsertApiData(username)
+		if userdata_in_db == None:
+
+			userdata = ScrapDataFromGithub(username)
+			AddNewDataToSQLite(username, userdata)
 
 		context = GetSQLiteData(username)
 		if theme == None: theme = "default"
