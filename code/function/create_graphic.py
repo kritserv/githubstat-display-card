@@ -2,6 +2,7 @@ from flask import render_template_string
 import svgwrite
 from PIL import ImageFont
 import json
+import csv
 
 font = ImageFont.truetype('function/font/Arial.ttf', 18)
 
@@ -47,6 +48,16 @@ def DrawSVG(context):
 		return {'username': context['username'], 'second_col': context['second_col'], 'message': 'color not exist'}, 201
 
 	AddRect((0, 0), ('100%', '100%'), bg_col)
+
+	try:
+		with open('display_image/'+context['img']+'.csv', mode='r') as csvfile:
+			img_data = csv.reader(csvfile)
+			next(img_data)
+			for row in img_data:
+				AddTxt(row[3], (row[0], row[1]), (col[row[2]], 'normal'))
+
+	except:
+		return {'username': context['username'], 'img': context['img'], 'message': 'img not exist'}, 201
 
 	AddTxt(context['username'], (x_pos, 20), (main_col, 'bold'))
 	AddTxt('@', (x_pos+TxtWidth(context['username']), 20), (second_col, 'normal'))

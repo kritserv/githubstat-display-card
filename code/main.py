@@ -15,6 +15,7 @@ def StatsView():
 	bg_col = request.args.get('bg_col')
 	main_col = request.args.get('main_col')
 	second_col = request.args.get('second_col')
+	img = request.args.get('img')
 
 	if username:
 
@@ -28,7 +29,7 @@ def StatsView():
 		context = GetSQLiteData(username)
 		
 		if theme == None: 
-			theme = "tango_dark"
+			theme = "gnome_dark"
 
 		if bg_col == None and 'dark' in theme: 
 			bg_col = "black"
@@ -42,14 +43,18 @@ def StatsView():
 
 		if second_col == None and bg_col == "black": 
 			second_col = "white"
-			
+
 		if second_col == None and bg_col == "white": 
 			second_col = "black"
+
+		if img == None: 
+			img = "octocat"
 
 		context['theme'] = theme
 		context['bg_col'] = bg_col
 		context['main_col'] = main_col
 		context['second_col'] = second_col
+		context['img'] = img
 
 		return DrawSVG(context)
 
