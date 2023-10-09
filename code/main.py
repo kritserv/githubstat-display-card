@@ -12,6 +12,9 @@ def StatsView():
 
 	username = request.args.get('username')
 	theme = request.args.get('theme')
+	bg_col = request.args.get('bg_col')
+	main_col = request.args.get('main_col')
+	second_col = request.args.get('second_col')
 
 	if username:
 
@@ -23,13 +26,20 @@ def StatsView():
 			AddNewDataToSQLite(username, userdata)
 
 		context = GetSQLiteData(username)
-		if theme == None: theme = "default"
+		
+		if theme == None: theme = "tango_dark"
+		if bg_col == None: bg_col = "black"
+		if main_col == None: main_col = "lightgreen"
+		if second_col == None: second_col = "white"
 		context['theme'] = theme
+		context['bg_col'] = bg_col
+		context['main_col'] = main_col
+		context['second_col'] = second_col
 
 		return DrawSVG(context)
 
 	else:
-		return {'username': username, 'theme': theme}, 201
+		return {'username': username}, 201
 
 if __name__ == '__main__':
 	app.run(debug=True)

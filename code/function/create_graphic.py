@@ -2,6 +2,8 @@ from flask import render_template_string
 import svgwrite
 from svgwrite import animate
 from PIL import ImageFont
+import json
+
 font = ImageFont.truetype('function/font/Arial.ttf', 18)
 
 def DrawSVG(context):
@@ -18,30 +20,25 @@ def DrawSVG(context):
 
 	dwg = svgwrite.Drawing(profile='tiny')
 
-	x_pos = 300
+	x_pos = 350
 
-	col = {
-		'black':'#171421',
-		'red':'#C01C28',
-		'green':'#26A269',
-		'brown':'#A2734C',
-		'darkblue':'#12488B',
-		'darkpurple':'#A347BA',
-		'cyan':'#2AA1B3',
-		'lightgrey':'#D0CFCC',
-		'grey':'#5E5C64',
-		'lightred':'#F66151',
-		'lightgreen':'#33D17A',
-		'yellow':'#E9AD0C',
-		'blue':'#2A7BDE',
-		'purple':'#C061CB',
-		'skyblue':'#33C7DE',
-		'white':'#FFFFFF',
-	}
+	file = open('theme/'+context['theme']+'.json')
+	col = json.load(file)
 
-	bg_col = '#171421'
-	main_col = col['green']
-	second_col = col['white']
+	try:
+		bg_col = col[context['bg_col']]
+	except:
+		return {'username': context['username'], 'bg_col': context['bg_col'], 'message': 'color not exist'}, 201
+
+	try:
+		main_col = col[context['main_col']]
+	except:
+		return {'username': context['username'], 'main_col': context['main_col'], 'message': 'color not exist'}, 201
+
+	try:
+		second_col = col[context['second_col']]
+	except:
+		return {'username': context['username'], 'second_col': context['second_col'], 'message': 'color not exist'}, 201
 
 	AddRect((0, 0), ('100%', '100%'), bg_col)
 
@@ -94,7 +91,6 @@ def DrawSVG(context):
 
 	svg = dwg.tostring()
 
-	# Add the CSS inside a <style> block
 	svg_with_css = f'''
 		<style>
 			.blink {{
@@ -109,7 +105,4 @@ def DrawSVG(context):
 		{svg}
 		'''
 
-	# Render the SVG with CSS in an HTML template
 	return render_template_string('<div>{{ svg|safe }}</div>', svg=svg_with_css)
-
-	#return dwg.tostring()
