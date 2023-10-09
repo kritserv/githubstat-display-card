@@ -1,6 +1,5 @@
 from flask import render_template_string
 import svgwrite
-from svgwrite import animate
 from PIL import ImageFont
 import json
 
@@ -22,8 +21,11 @@ def DrawSVG(context):
 
 	x_pos = 350
 
-	file = open('theme/'+context['theme']+'.json')
-	col = json.load(file)
+	try:
+		file = open('theme/'+context['theme']+'.json')
+		col = json.load(file)
+	except:
+		return {'username': context['username'], 'theme': context['theme'], 'message': 'theme not exist'}, 201
 
 	try:
 		bg_col = col[context['bg_col']]
