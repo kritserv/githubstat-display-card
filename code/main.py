@@ -27,10 +27,25 @@ def StatsView():
 
 		context = GetSQLiteData(username)
 		
-		if theme == None: theme = "tango_dark"
-		if bg_col == None: bg_col = "black"
-		if main_col == None: main_col = "lightgreen"
-		if second_col == None: second_col = "white"
+		if theme == None: 
+			theme = "tango_dark"
+
+		if bg_col == None and 'dark' in theme: 
+			bg_col = "black"
+		elif bg_col == None and 'light' in theme: 
+			bg_col = "white"
+		else: 
+			bg_col = "black"
+
+		if main_col == None: 
+			main_col = "lightgreen"
+
+		if second_col == None and bg_col == "black": 
+			second_col = "white"
+			
+		if second_col == None and bg_col == "white": 
+			second_col = "black"
+
 		context['theme'] = theme
 		context['bg_col'] = bg_col
 		context['main_col'] = main_col

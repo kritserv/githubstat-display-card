@@ -22,10 +22,14 @@ def DrawSVG(context):
 	x_pos = 350
 
 	try:
-		file = open('theme/'+context['theme']+'.json')
+		file = open('theme/'+context['theme'].split('_')[0]+'.json')
 		col = json.load(file)
 	except:
-		return {'username': context['username'], 'theme': context['theme'], 'message': 'theme not exist'}, 201
+		try:
+			file = open('theme/'+context['theme']+'.json')
+			col = json.load(file)
+		except:
+			return {'username': context['username'], 'theme': context['theme'], 'message': 'theme not exist'}, 201
 
 	try:
 		bg_col = col[context['bg_col']]
@@ -52,7 +56,7 @@ def DrawSVG(context):
 	while TxtWidth(line) < TxtWidth(f"{context['username']}@githubstat")+20:
 		line += '_ '
 
-	AddTxt(line, (x_pos, 50), (col['white'], 'normal'))
+	AddTxt(line, (x_pos, 50), (second_col, 'normal'))
 
 	AddTxt('last year contrib: ', (x_pos, 80), (main_col, 'bold'))
 	AddTxt(context['contrib'], (x_pos+TxtWidth('last year contrib: '), 80), (second_col, 'normal'))
