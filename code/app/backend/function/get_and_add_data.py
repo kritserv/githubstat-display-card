@@ -3,7 +3,7 @@ import sqlite3
 from bs4 import BeautifulSoup
 from datetime import date
 
-con = sqlite3.connect("requested_data.sqlite", check_same_thread=False)
+con = sqlite3.connect("app/backend/data/requested_data.sqlite", check_same_thread=False)
 cur = con.cursor()
 
 def CreateNewTable():
@@ -82,6 +82,8 @@ def ScrapDataFromGithub(username):
 
 			if total_stars > 999:
 				total_stars = str(round(total_stars/1000, 2)) + 'k'
+			sorted_language = sorted(used_language_count_dict.items(), key=lambda item: item[1])
+			used_language_count_dict = dict(sorted_language)
 			for language in used_language_count_dict:
 				used_language_count_dict[language] = str(round(used_language_count_dict[language]/total_amounts*100, 2))
 

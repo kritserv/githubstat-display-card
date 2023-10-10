@@ -4,7 +4,7 @@ from PIL import ImageFont
 import json
 import csv
 
-font = ImageFont.truetype('function/font/Arial.ttf', 18)
+font = ImageFont.truetype('app/frontend/function/font/Arial.ttf', 18)
 
 def DrawSVG(context):
 
@@ -23,11 +23,11 @@ def DrawSVG(context):
 	x_pos = 350
 
 	try:
-		file = open('theme/'+context['theme'].split('_')[0]+'.json')
+		file = open('app/frontend/theme/'+context['theme'].split('_')[0]+'.json')
 		col = json.load(file)
 	except:
 		try:
-			file = open('theme/'+context['theme']+'.json')
+			file = open('app/frontend/theme/'+context['theme']+'.json')
 			col = json.load(file)
 		except:
 			return {'username': context['username'], 'theme': context['theme'], 'message': 'theme does not exist'}, 201
@@ -50,7 +50,7 @@ def DrawSVG(context):
 	AddRect((0, 0), ('100%', '100%'), bg_col)
 
 	try:
-		with open('display_image/'+context['img']+'.csv', mode='r') as csvfile:
+		with open('app/frontend/display_image/'+context['img']+'.csv', mode='r') as csvfile:
 			img_data = csv.reader(csvfile)
 			next(img_data)
 			for row in img_data:
@@ -80,7 +80,7 @@ def DrawSVG(context):
 
 	context['all_lang'] = context['all_lang'].replace("'", "").replace('{','').replace('}','').split(',')
 	y_pos = 170
-	for lang_and_amount in context['all_lang']:
+	for lang_and_amount in list(reversed(context['all_lang'])):
 		lang, amount = lang_and_amount.split(":")
 
 		AddTxt(f'{lang}: ', (x_pos, y_pos), (main_col, 'bold'))
