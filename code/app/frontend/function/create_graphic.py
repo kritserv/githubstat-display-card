@@ -1,4 +1,5 @@
-from flask import render_template_string
+from flask import Response
+from bs4 import BeautifulSoup, NavigableString
 import svgwrite
 import json
 import csv
@@ -130,20 +131,17 @@ def DrawSVG(context):
 	blinktxt = dwg.text('|', insert=(10+TxtWidth(f"{context['username']}@githubstat:~$  "), y_pos), fill=main_col, font_weight='bold', font_family='Arial', class_='blink')
 	dwg.add(blinktxt)
 
-	svg = dwg.tostring()
+	html_string = dwg.tostring()
+	soup = BeautifulSoup(html_string, 'html.parser')
+	svg_tag = soup.find('svg')
 
-	svg_with_css = f'''
-		<style>
-			.blink {{
-				animation: blink 1s steps(2, start) infinite;
-			}}
-			@keyframes blink {{
-				to {{
-					visibility: hidden;
-					}}
-			}}
-		</style>
-		{svg}
-		'''
+	style_tag = soup.new_tag('style')
 
-	return render_template_string('<div>{{ svg|safe }}</div>', svg=svg_with_css)
+	css = """.blink {animation: blink 1s steps(2, start) infinite;}
+		@keyframes blink { to { visibility: hidden;}}"""
+	style_tag.append(NavigableString(css))
+
+	svg_tag.append(style_tag)
+	svg = str(svg_tag)
+
+	return Response(svg, mimetype='image/svg+xml')
