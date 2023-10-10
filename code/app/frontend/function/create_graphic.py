@@ -5,12 +5,12 @@ import csv
 
 Arial_dict_size = {
 	4 : ['i', 'l'],
-	5 : ['j', 't', 'I', '\\', '/', '!', '[', ']', ' ', '.'],
+	5 : ['j', 't', 'I', '\\', '/', '!', '[', ']', ' ', '.', ':'],
 	6 : ['f', '-', '(', ')', '"', '}', '{'],
 	7 : ['r', '*'],
-	8 : ['^', ':'],
+	8 : ['^'],
 	9 : ['c', 'k', 's', 'v', 'x', 'y', 'z', 'J'],
-	10 : ['a', 'b', 'd', 'e', 'g', 'h', 'n', 'o', 'p', 'q', 'u', 'L', '#', '?'],
+	10 : ['a', 'b', 'd', 'e', 'g', 'h', 'n', 'o', 'p', 'q', 'u', 'L', '#', '?', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
 	11 : ['F', 'T', 'Z', '+', '=', '>', '<'],
 	12 : ['B', 'E', 'K', 'P', 'S', 'V', 'X', 'Y', '&', '_', '&'],
 	13 : ['w', 'C', 'D', 'H', 'N', 'R', 'U'],
@@ -93,7 +93,7 @@ def DrawSVG(context):
 	AddTxt(context['contrib'], (x_pos+TxtWidth('last year contrib: '), 80), (second_col, 'normal'))
 
 	AddTxt('info of top10 repos: ', (x_pos, 110), (main_col, 'bold'))
-	AddTxt('by stargaze', (x_pos+TxtWidth('info of top10 repos:   '), 110), (second_col, 'normal'))
+	AddTxt('by stargaze', (x_pos+TxtWidth('info of top10 repos: '), 110), (second_col, 'normal'))
 
 	AddTxt('Total Stars: ', (x_pos, 140), (main_col, 'bold'))
 	AddTxt(str(context['all_stars'])+' ★', (x_pos+TxtWidth('Total Stars: '), 140), (second_col, 'normal'))
