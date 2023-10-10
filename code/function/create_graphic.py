@@ -75,8 +75,8 @@ def DrawSVG(context):
 	AddTxt('info of top10 repos: ', (x_pos, 110), (main_col, 'bold'))
 	AddTxt('by stargaze', (x_pos+TxtWidth('info of top10 repos: '), 110), (second_col, 'normal'))
 
-	AddTxt('Total stars: ', (x_pos, 140), (main_col, 'bold'))
-	AddTxt(context['all_stars'], (x_pos+TxtWidth('Total stars: '), 140), (second_col, 'normal'))
+	AddTxt('Total Stars: ', (x_pos, 140), (main_col, 'bold'))
+	AddTxt(str(context['all_stars'])+' ★', (x_pos+TxtWidth('Total Stars: '), 140), (second_col, 'normal'))
 
 	context['all_lang'] = context['all_lang'].replace("'", "").replace('{','').replace('}','').split(',')
 	y_pos = 170
@@ -86,6 +86,10 @@ def DrawSVG(context):
 		AddTxt(f'{lang}: ', (x_pos, y_pos), (main_col, 'bold'))
 		AddTxt(amount, (x_pos+TxtWidth(f'{lang}: '), y_pos), (second_col, 'normal'))
 		y_pos += 30
+
+	AddTxt('date: ', (x_pos, y_pos), (main_col, 'bold'))
+	AddTxt(context['latest_update'], (x_pos+TxtWidth('date: '), y_pos), (second_col, 'normal'))
+	y_pos += 30
 
 	color_in_row = 0
 	for color in col:

@@ -9,11 +9,14 @@ from function.get_and_add_data import ScrapDataFromGithub, AddNewDataToSQLite
 import time
 
 def UpdateUserData(updated_data, cur):
-	username, profile_img, last_year_contrib, total_stars, used_language_count_dict = updated_data
-	cur.execute(
-		"UPDATE saved_profile SET image = ?, contrib = ?, all_stars = ?, all_lang = ? WHERE usr = ?", 
-		(profile_img, last_year_contrib, total_stars, used_language_count_dict, username)
-		)
+	try:
+		username, profile_img, last_year_contrib, total_stars, used_language_count_dict = updated_data
+		cur.execute(
+			"UPDATE saved_profile SET image = ?, contrib = ?, all_stars = ?, all_lang = ? WHERE usr = ?", 
+			(profile_img, last_year_contrib, total_stars, used_language_count_dict, username)
+			)
+	except:
+		pass
 
 def UpdateSQLiteDatabase():
 	start_time = time.time()

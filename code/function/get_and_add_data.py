@@ -1,12 +1,13 @@
 import requests
 import sqlite3
 from bs4 import BeautifulSoup
+from datetime import date
 
 con = sqlite3.connect("requested_data.sqlite", check_same_thread=False)
 cur = con.cursor()
 
 def CreateNewTable():
-	cur.execute("CREATE TABLE IF NOT EXISTS saved_profile(usr, image, contrib, all_stars, all_lang)")
+	cur.execute("CREATE TABLE IF NOT EXISTS saved_profile(usr, image, contrib, all_stars, all_lang, latest_update)")
 
 def QueryFromSQLite(username):
 	return cur.execute(f"SELECT * FROM saved_profile WHERE usr='{username}'").fetchone()
@@ -14,7 +15,7 @@ def QueryFromSQLite(username):
 def GetSQLiteData(username):
 	context = {}
 	query = QueryFromSQLite(username)
-	context['username'], context['image'], context['contrib'], context['all_stars'], context['all_lang'] = query
+	context['username'], context['image'], context['contrib'], context['all_stars'], context['all_lang'], context['latest_update'] = query
 
 	return context
 
@@ -84,11 +85,11 @@ def ScrapDataFromGithub(username):
 			for language in used_language_count_dict:
 				used_language_count_dict[language] = str(round(used_language_count_dict[language]/total_amounts*100, 2))
 
-			return (username, profile_img, last_year_contrib, total_stars, str(used_language_count_dict))
+			return (username, profile_img, last_year_contrib, total_stars, str(used_language_count_dict), str(date.today()))
 
 def AddNewDataToSQLite(username, newdata):
 	try:
-		cur.execute("INSERT INTO saved_profile VALUES (?, ?, ?, ?, ?)", newdata)
+		cur.execute("INSERT INTO saved_profile VALUES (?, ?, ?, ?, ?, ?)", newdata)
 
 	except:
 		pass
