@@ -30,22 +30,22 @@ def DrawSVG(context):
 			file = open('theme/'+context['theme']+'.json')
 			col = json.load(file)
 		except:
-			return {'username': context['username'], 'theme': context['theme'], 'message': 'theme not exist'}, 201
+			return {'username': context['username'], 'theme': context['theme'], 'message': 'theme does not exist'}, 201
 
 	try:
 		bg_col = col[context['bg_col']]
 	except:
-		return {'username': context['username'], 'bg_col': context['bg_col'], 'message': 'color not exist'}, 201
+		return {'username': context['username'], 'bg_col': context['bg_col'], 'message': 'color does not exist'}, 201
 
 	try:
 		main_col = col[context['main_col']]
 	except:
-		return {'username': context['username'], 'main_col': context['main_col'], 'message': 'color not exist'}, 201
+		return {'username': context['username'], 'main_col': context['main_col'], 'message': 'color does not exist'}, 201
 
 	try:
 		second_col = col[context['second_col']]
 	except:
-		return {'username': context['username'], 'second_col': context['second_col'], 'message': 'color not exist'}, 201
+		return {'username': context['username'], 'second_col': context['second_col'], 'message': 'color does not exist'}, 201
 
 	AddRect((0, 0), ('100%', '100%'), bg_col)
 
@@ -57,7 +57,7 @@ def DrawSVG(context):
 				AddTxt(row[3], (row[0], row[1]), (col[row[2]], 'normal'))
 
 	except:
-		return {'username': context['username'], 'img': context['img'], 'message': 'img not exist'}, 201
+		return {'username': context['username'], 'img': context['img'], 'message': 'img does not exist'}, 201
 
 	AddTxt(context['username'], (x_pos, 20), (main_col, 'bold'))
 	AddTxt('@', (x_pos+TxtWidth(context['username']), 20), (second_col, 'normal'))

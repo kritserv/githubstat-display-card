@@ -91,6 +91,6 @@ def AddNewDataToSQLite(username, newdata):
 		cur.execute("INSERT INTO saved_profile VALUES (?, ?, ?, ?, ?)", newdata)
 
 	except:
-		cur.execute("INSERT INTO saved_profile VALUES (?, ?, ?, ?, ?)", (username, '', '', '' ,''))
+		pass
 
 	con.commit()

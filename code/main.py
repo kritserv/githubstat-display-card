@@ -19,6 +19,8 @@ def StatsView():
 
 	if username:
 
+		context = {}
+		
 		userdata_in_db = QueryFromSQLite(username)
 
 		if userdata_in_db == None:
@@ -26,7 +28,10 @@ def StatsView():
 			userdata = ScrapDataFromGithub(username)
 			AddNewDataToSQLite(username, userdata)
 
-		context = GetSQLiteData(username)
+		try:
+			context = GetSQLiteData(username)
+		except:
+			return {'username': username, 'message': 'username does not exist'}, 201
 		
 		if theme == None: 
 			theme = "gnome_dark"
