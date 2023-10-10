@@ -1,7 +1,5 @@
 import sqlite3
-import os
-import sys
-from get_and_add_data import ScrapDataFromGithub, AddNewDataToSQLite
+from get_and_add_data import ScrapDataFromGithub
 import time
 
 def UpdateUserData(updated_data, cur):

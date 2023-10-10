@@ -1,15 +1,35 @@
 from flask import render_template_string
 import svgwrite
-from PIL import ImageFont
 import json
 import csv
 
-font = ImageFont.truetype('app/frontend/function/font/Arial.ttf', 18)
+Arial_dict_size = {
+	4 : ['i', 'l'],
+	5 : ['j', 't', 'I', '\\', '/', '!', '[', ']', ' ', '.'],
+	6 : ['f', '-', '(', ')', '"', '}', '{'],
+	7 : ['r', '*'],
+	8 : ['^', ':'],
+	9 : ['c', 'k', 's', 'v', 'x', 'y', 'z', 'J'],
+	10 : ['a', 'b', 'd', 'e', 'g', 'h', 'n', 'o', 'p', 'q', 'u', 'L', '#', '?'],
+	11 : ['F', 'T', 'Z', '+', '=', '>', '<'],
+	12 : ['B', 'E', 'K', 'P', 'S', 'V', 'X', 'Y', '&', '_', '&'],
+	13 : ['w', 'C', 'D', 'H', 'N', 'R', 'U'],
+	14 : ['A', 'G', 'O', 'Q', '★'],
+	15 : ['m', 'M'],
+	16 : ['%'],
+	17 : ['W'],
+	18 : ['@', '$']
+}
 
 def DrawSVG(context):
 
 	def TxtWidth(txt):
-		return font.getsize(txt)[0]
+		total_length = 0
+		for char in txt:
+			for length in Arial_dict_size:
+				if char in Arial_dict_size[length]:
+					total_length+=length
+		return total_length
 
 	def AddTxt(txt, pos, style):
 		color, weight = style
@@ -73,7 +93,7 @@ def DrawSVG(context):
 	AddTxt(context['contrib'], (x_pos+TxtWidth('last year contrib: '), 80), (second_col, 'normal'))
 
 	AddTxt('info of top10 repos: ', (x_pos, 110), (main_col, 'bold'))
-	AddTxt('by stargaze', (x_pos+TxtWidth('info of top10 repos: '), 110), (second_col, 'normal'))
+	AddTxt('by stargaze', (x_pos+TxtWidth('info of top10 repos:   '), 110), (second_col, 'normal'))
 
 	AddTxt('Total Stars: ', (x_pos, 140), (main_col, 'bold'))
 	AddTxt(str(context['all_stars'])+' ★', (x_pos+TxtWidth('Total Stars: '), 140), (second_col, 'normal'))
@@ -107,7 +127,7 @@ def DrawSVG(context):
 	AddTxt('githubstat:', (10+TxtWidth(context['username']+'@'), y_pos), (main_col, 'bold'))
 	AddTxt('~$', (10+TxtWidth(f"{context['username']}@githubstat:"), y_pos), (second_col, 'bold'))
 
-	blinktxt = dwg.text('|', insert=(10+TxtWidth(f"{context['username']}@githubstat:~$"), y_pos), fill=main_col, font_weight='bold', font_family='Arial', class_='blink')
+	blinktxt = dwg.text('|', insert=(10+TxtWidth(f"{context['username']}@githubstat:~$  "), y_pos), fill=main_col, font_weight='bold', font_family='Arial', class_='blink')
 	dwg.add(blinktxt)
 
 	svg = dwg.tostring()
