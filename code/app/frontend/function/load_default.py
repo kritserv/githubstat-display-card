@@ -7,7 +7,9 @@ def UseDefaultValue(theme, bg_col, main_col, second_col, img):
 		bg_col = "black"
 	elif bg_col == None and 'light' in theme:
 		bg_col = "white"
-
+	if bg_col == None:
+		bg_col = "black"
+		
 	if main_col == None:
 		main_col = "lightgreen"
 

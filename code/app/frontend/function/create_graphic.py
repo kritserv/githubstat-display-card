@@ -36,8 +36,11 @@ def DrawSVG(context):
 		color, weight = style
 		dwg.add(dwg.text(txt, insert=pos, fill=color, font_weight=weight, font_family='Arial'))
 
-	def AddRect(pos, size, color):
-		dwg.add(dwg.rect(insert=pos, size=size, fill=color))
+	def AddRect(pos, size, color, class_):
+		if class_:
+			dwg.add(dwg.rect(insert=pos, size=size, fill=color, class_=class_))
+		else:
+			dwg.add(dwg.rect(insert=pos, size=size, fill=color))
 
 	dwg = svgwrite.Drawing(profile='tiny')
 
@@ -68,14 +71,20 @@ def DrawSVG(context):
 	except:
 		return {'username': context['username'], 'second_col': context['second_col'], 'message': 'color does not exist'}, 201
 
-	AddRect((0, 0), ('100%', '100%'), bg_col)
+	AddRect((0, 0), ('100%', '100%'), bg_col, None)
 
 	try:
 		with open('app/frontend/display_image/'+context['img']+'.csv', mode='r') as csvfile:
-			img_data = csv.reader(csvfile)
-			next(img_data)
-			for row in img_data:
-				AddTxt(row[3], (row[0], row[1]), (col[row[2]], 'normal'))
+			if 'pixelart/' in context['img']:
+				img_data = csv.reader(csvfile)
+				next(img_data)
+				for row in img_data:
+					AddRect((row[0], row[1]), (row[2], row[3]), row[4], row[5])
+			else:
+				img_data = csv.reader(csvfile)
+				next(img_data)
+				for row in img_data:
+					AddTxt(row[3], (row[0], row[1]), (col[row[2]], 'normal'))
 
 	except:
 		return {'username': context['username'], 'img': context['img'], 'message': 'img does not exist'}, 201
@@ -118,7 +127,7 @@ def DrawSVG(context):
 			color_in_row = 0
 			y_pos += 30
 			x_pos -= 30*8
-		AddRect((x_pos, y_pos), (30, 20), col[color])
+		AddRect((x_pos, y_pos), (30, 20), col[color], None)
 		color_in_row += 1
 		x_pos += 30
 
@@ -138,7 +147,10 @@ def DrawSVG(context):
 	style_tag = soup.new_tag('style')
 
 	css = """.blink {animation: blink 1s steps(2, start) infinite;}
-		@keyframes blink { to { visibility: hidden;}}"""
+.blink2 {animation: blink 2s steps(2, start) infinite;}
+.movedown {animation: movedown 2s steps(2, end) infinite;}
+@keyframes blink { to { visibility: hidden;}}
+@keyframes movedown { to { transform: translateY(80px);}}"""
 	style_tag.append(NavigableString(css))
 
 	svg_tag.append(style_tag)
