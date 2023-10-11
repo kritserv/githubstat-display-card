@@ -25,7 +25,7 @@ def ScrapDataFromGithub(username):
 	response = requests.get(f'{url}/{username}')
 	
 	if response.status_code != 200:
-		return {'username': username, 'message': response.status_code}
+		return {'username': username, 'message': response.status_code}, 201
 
 	else:
 		soup = BeautifulSoup(response.content, "html.parser")
@@ -36,7 +36,7 @@ def ScrapDataFromGithub(username):
 		repo_url_response = requests.get(f'{url}/{username}/?tab=repositories&sort=stargazers')
 		
 		if repo_url_response.status_code != 200:
-			return {'username': username, 'message': response.status_code}
+			return {'username': username, 'message': repo_url_response.status_code}, 201
 		
 		else:
 			repo_soup = BeautifulSoup(repo_url_response.content, "html.parser")
@@ -58,7 +58,7 @@ def ScrapDataFromGithub(username):
 					repo = repo_elem.find("a")["href"]
 					repo_url_response = requests.get(f'{url}/{repo}')
 					if repo_url_response.status_code != 200:
-						return {'username': username, 'message': response.status_code}
+						return {'username': username, 'message': response.status_code}, 201
 
 					else:
 						repo_soup = BeautifulSoup(repo_url_response.content, "html.parser")
