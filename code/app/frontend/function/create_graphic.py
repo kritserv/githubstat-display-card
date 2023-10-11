@@ -3,34 +3,9 @@ from bs4 import BeautifulSoup, NavigableString
 import svgwrite
 import json
 import csv
-
-Arial_dict_size = {
-	4 : ['i', 'l'],
-	5 : ['j', 't', 'I', '\\', '/', '!', '[', ']', ' ', '.', ':'],
-	6 : ['f', '-', '(', ')', '"', '}', '{'],
-	7 : ['r', '*'],
-	8 : ['^'],
-	9 : ['c', 'k', 's', 'v', 'x', 'y', 'z', 'J'],
-	10 : ['a', 'b', 'd', 'e', 'g', 'h', 'n', 'o', 'p', 'q', 'u', 'L', '#', '?', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
-	11 : ['F', 'T', 'Z', '+', '=', '>', '<'],
-	12 : ['B', 'E', 'K', 'P', 'S', 'V', 'X', 'Y', '&', '_', '&'],
-	13 : ['w', 'C', 'D', 'H', 'N', 'R', 'U'],
-	14 : ['A', 'G', 'O', 'Q', '★'],
-	15 : ['m', 'M'],
-	16 : ['%'],
-	17 : ['W'],
-	18 : ['@', '$']
-}
+from .calculate_text_width import TxtWidth
 
 def DrawSVG(context):
-
-	def TxtWidth(txt):
-		total_length = 0
-		for char in txt:
-			for length in Arial_dict_size:
-				if char in Arial_dict_size[length]:
-					total_length+=length
-		return total_length
 
 	def AddTxt(txt, pos, style):
 		color, weight = style
@@ -138,10 +113,7 @@ def DrawSVG(context):
 	style_tag = soup.new_tag('style')
 
 	css = """.blink {animation: blink 1s steps(2, start) infinite;}
-.blink2 {animation: blink 2s steps(2, start) infinite;}
-.movedown {animation: movedown 2s steps(2, end) infinite;}
-@keyframes blink { to { visibility: hidden;}}
-@keyframes movedown { to { transform: translateY(80px);}}"""
+@keyframes blink { to { visibility: hidden;}}"""
 	style_tag.append(NavigableString(css))
 
 	svg_tag.append(style_tag)
