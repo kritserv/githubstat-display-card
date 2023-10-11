@@ -1,4 +1,0 @@
-x_pos,y_pos,x_size,y_size,col,class
-10,10,320,320,white,None
-20,20,2.5,2.5,red,blink2
-20,30,2.5,2.5,blue,movedown
