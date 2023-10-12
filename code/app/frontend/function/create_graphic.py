@@ -7,8 +7,8 @@ from .calculate_text_width import TxtWidth
 
 def DrawSVG(context):
 
-	def AddTxt(txt, pos, style):
-		color, weight = style
+	def AddTxt(txt, pos, col_weight):
+		color, weight = col_weight
 		dwg.add(dwg.text(txt, insert=pos, fill=color, font_weight=weight, font_family='Arial'))
 
 	def AddRect(pos, size, color):
