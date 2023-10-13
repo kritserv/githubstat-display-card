@@ -1,9 +1,8 @@
 from flask import Response
-from bs4 import BeautifulSoup, NavigableString
 import svgwrite
 import csv
 from .calculate_text_width import TxtWidth
-from .add_svg_element import AddTxt, AddRect
+from .add_svg_element import AddTxt, AddRect, AddCss
 from .settings import LoadTheme, img_dir
 
 def DrawSvg(context):
@@ -98,17 +97,6 @@ def DrawSvg(context):
 	blinktxt = dwg.text('|', insert=(10+TxtWidth(f"{context['username']}@githubstat:~$  "), y_pos), fill=main_col, font_weight='bold', font_family='Arial', class_='blink')
 	dwg.add(blinktxt)
 
-	html_string = dwg.tostring()
-	soup = BeautifulSoup(html_string, 'html.parser')
-	svg_tag = soup.find('svg')
+	dwg = AddCss('blink', dwg)
 
-	style_tag = soup.new_tag('style')
-
-	css = """.blink {animation: blink 1s steps(2, start) infinite;}
-@keyframes blink { to { visibility: hidden;}}"""
-	style_tag.append(NavigableString(css))
-
-	svg_tag.append(style_tag)
-	svg = str(svg_tag)
-
-	return Response(svg, mimetype='image/svg+xml')
+	return Response(dwg, mimetype='image/svg+xml')
