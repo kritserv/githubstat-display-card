@@ -1,6 +1,11 @@
 import sqlite3
 from get_and_add_data import ScrapDataFromGithub
 import time
+import os
+
+root_dir = os.getcwd()
+
+database_path = f'{root_dir}/app/backend/data/requested_data.sqlite'
 
 def UpdateUserData(updated_data, cur, con):
 	try:
@@ -13,9 +18,9 @@ def UpdateUserData(updated_data, cur, con):
 	except:
 		print("UPDATE FAILED!")
 
-def UpdateSQLiteDatabase():
+def UpdateSqliteDatabase():
 	start_time = time.time()
-	con = sqlite3.connect("app/backend/data/requested_data.sqlite", check_same_thread=False)
+	con = sqlite3.connect(database_path, check_same_thread=False)
 	cur = con.cursor()
 	cur.execute("SELECT usr FROM saved_profile")
 	usernames = [row[0] for row in cur.fetchall()]
@@ -28,4 +33,4 @@ def UpdateSQLiteDatabase():
 
 
 if __name__ == '__main__':
-	UpdateSQLiteDatabase()
+	UpdateSqliteDatabase()

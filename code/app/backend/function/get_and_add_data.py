@@ -2,19 +2,24 @@ import requests
 import sqlite3
 from bs4 import BeautifulSoup
 from datetime import date
+import os
 
-con = sqlite3.connect("app/backend/data/requested_data.sqlite", check_same_thread=False)
+root_dir = os.getcwd()
+
+database_path = f'{root_dir}/app/backend/data/requested_data.sqlite'
+
+con = sqlite3.connect(database_path, check_same_thread=False)
 cur = con.cursor()
 
 def CreateNewTable():
 	cur.execute("CREATE TABLE IF NOT EXISTS saved_profile(usr, image, contrib, all_stars, all_lang, latest_update)")
 
-def QueryFromSQLite(username):
+def QueryFromSqlite(username):
 	return cur.execute(f"SELECT * FROM saved_profile WHERE usr='{username}'").fetchone()
 
-def GetSQLiteData(username):
+def GetSqliteData(username):
 	context = {}
-	query = QueryFromSQLite(username)
+	query = QueryFromSqlite(username)
 	context['username'], context['image'], context['contrib'], context['all_stars'], context['all_lang'], context['latest_update'] = query
 
 	return context
@@ -82,6 +87,8 @@ def ScrapDataFromGithub(username):
 
 			if total_stars > 999:
 				total_stars = str(round(total_stars/1000, 2)) + 'k'
+			else:
+				total_stars = str(int(total_stars))
 			sorted_language = sorted(used_language_count_dict.items(), key=lambda item: item[1])
 			used_language_count_dict = dict(sorted_language)
 			for language in used_language_count_dict:
@@ -89,7 +96,7 @@ def ScrapDataFromGithub(username):
 
 			return (username, profile_img, last_year_contrib, total_stars, str(used_language_count_dict), str(date.today()))
 
-def AddNewDataToSQLite(username, newdata):
+def AddNewDataToSqlite(username, newdata):
 	try:
 		cur.execute("INSERT INTO saved_profile VALUES (?, ?, ?, ?, ?, ?)", newdata)
 

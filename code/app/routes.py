@@ -1,8 +1,8 @@
 from flask import request
 from app import app
-from app.backend.function.get_and_add_data import CreateNewTable, QueryFromSQLite, GetSQLiteData, ScrapDataFromGithub, AddNewDataToSQLite
+from app.backend.function.get_and_add_data import CreateNewTable, QueryFromSqlite, GetSqliteData, ScrapDataFromGithub, AddNewDataToSqlite
 from app.frontend.function.load_default import UseDefaultValue
-from app.frontend.function.create_graphic import DrawSVG
+from app.frontend.function.create_graphic import DrawSvg
 
 CreateNewTable() # Create table if not exist
 
@@ -20,15 +20,15 @@ def StatsView():
 
         context = {}
 
-        userdata_in_db = QueryFromSQLite(username)
+        userdata_in_db = QueryFromSqlite(username)
 
         if userdata_in_db == None:
 
             userdata = ScrapDataFromGithub(username)
-            AddNewDataToSQLite(username, userdata)
+            AddNewDataToSqlite(username, userdata)
 
         try:
-            context = GetSQLiteData(username)
+            context = GetSqliteData(username)
         except:
             return {'username': username, 'message': 'username does not exist'}, 201
         
@@ -40,7 +40,7 @@ def StatsView():
                 img
             )
 
-        return DrawSVG(context)
+        return DrawSvg(context)
 
     else:
         return {'username': username}, 201
