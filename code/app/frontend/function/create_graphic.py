@@ -40,11 +40,14 @@ def DrawSvg(context):
 		with open(img_dir+context['img']+'.csv', mode='r') as csvfile:
 			img_data = csv.reader(csvfile)
 			next(img_data)
-			for row in img_data:
-				AddTxt(row[3], (row[0], row[1]), (col[row[2]], 'normal'), dwg)
-
+			for column in img_data:
+				AddTxt(column[3], (column[0], column[1]), (column[2], 'normal'), dwg)
 	except:
-		return {'username': context['username'], 'img': context['img'], 'message': 'img does not exist'}, 201
+		with open(img_dir+'animate/'+context['img']+'.csv', mode='r') as csvfile:
+			img_data = csv.reader(csvfile)
+			next(img_data)
+			for column in img_data:
+				dwg.add(dwg.text(column[3], insert=(column[0], column[1]), fill=col[column[2]], font_weight='normal', font_family='Arial', class_='frame'+column[4]))
 
 	AddTxt(context['username'], (x_pos, 20), (main_col, 'bold'), dwg)
 	AddTxt('@', (x_pos+TxtWidth(context['username']), 20), (second_col, 'normal'), dwg)
@@ -97,6 +100,6 @@ def DrawSvg(context):
 	blinktxt = dwg.text('|', insert=(10+TxtWidth(f"{context['username']}@githubstat:~$  "), y_pos), fill=main_col, font_weight='bold', font_family='Arial', class_='blink')
 	dwg.add(blinktxt)
 
-	dwg = AddCss('blink', dwg)
+	dwg = AddCss('blink_and_animate', dwg)
 
 	return Response(dwg, mimetype='image/svg+xml')
