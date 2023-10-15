@@ -2,7 +2,7 @@ from flask import request
 from app import app
 from app.backend.function.get_and_add_data import CreateNewTable, QueryFromSqlite, GetSqliteData, ScrapDataFromGithub, AddNewDataToSqlite
 from app.frontend.function.load_default import UseDefaultValue
-from app.frontend.function.create_graphic import DrawSvg
+from app.frontend.function.main import DrawSvg
 
 CreateNewTable() # Create table if not exist
 
