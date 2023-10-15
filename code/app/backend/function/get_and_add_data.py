@@ -48,7 +48,6 @@ def ScrapDataFromGithub(username):
 			repo_elem_list = repo_soup.find(id="user-repositories-list").find_all("li")
 
 			used_language_count_dict = {}
-			test = []
 			total_stars = 0
 			total_amounts = 0
 
