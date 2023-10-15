@@ -15,6 +15,7 @@ def StatsView():
     main_col = request.args.get('main_col')
     second_col = request.args.get('second_col')
     img = request.args.get('img')
+    use_font = request.args.get('font')
 
     if username:
 
@@ -32,12 +33,13 @@ def StatsView():
         except:
             return {'username': username, 'message': 'username does not exist'}, 201
         
-        context['theme'], context['bg_col'], context['main_col'], context['second_col'], context['img'] = UseDefaultValue(
+        context['theme'], context['bg_col'], context['main_col'], context['second_col'], context['img'], context['use_font'] = UseDefaultValue(
                 theme, 
                 bg_col, 
                 main_col, 
                 second_col, 
-                img
+                img,
+                use_font
             )
 
         return DrawSvg(context)

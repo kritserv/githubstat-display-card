@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup, NavigableString
 
-def AddTxt(txt, pos, col_weight, dwg):
+def AddTxt(txt, pos, col_weight, dwg, used_font):
 	color, weight = col_weight
-	dwg.add(dwg.text(txt, insert=pos, fill=color, font_weight=weight, font_family='Arial'))
+	dwg.add(dwg.text(txt, insert=pos, fill=color, font_weight=weight, font_family=used_font.title()))
 
 def AddRect(pos, size, color, dwg):
 	dwg.add(dwg.rect(insert=pos, size=size, fill=color))

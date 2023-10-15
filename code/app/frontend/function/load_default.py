@@ -1,4 +1,4 @@
-def UseDefaultValue(theme, bg_col, main_col, second_col, img):
+def UseDefaultValue(theme, bg_col, main_col, second_col, img, use_font):
 
 	if theme == None:
 		theme = "gnome_dark"
@@ -24,4 +24,7 @@ def UseDefaultValue(theme, bg_col, main_col, second_col, img):
 	if img == None:
 		img = "octocat"
 
-	return theme, bg_col, main_col, second_col, img
+	if use_font == None:
+		use_font = "arial"
+
+	return theme, bg_col, main_col, second_col, img, use_font
