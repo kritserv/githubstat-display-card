@@ -1,10 +1,22 @@
-<img src="https://neoflask.pythonanywhere.com/?username=kritserv&img=flask&main_col=cyan&theme=solarized" width="700" height="450">
+<img src="updated_preview_img/githubstat.svg" width="700" height="450">
 
 ```
-
 <img src="https://neoflask.pythonanywhere.com/?username=kritserv&img=flask&main_col=cyan&theme=solarized" width="700" height="450">
+```
+
+## ⚠️ Caution
+
+When you put the above code on README file, it may not update your `githubstat` as expected. This is because the NeoFlask web app is programmed to update user stats daily, but GitHub uses a cached (camo) version of the image instead of fetching the image from the original source.
+
+## Recommended Approach
+
+To ensure your `githubstat` is updated correctly, consider using a bot that automatically updates the image on a schedule. Then, use the path of the updated image as the source in the image tag displayed on your GitHub README.
 
 ```
+<img src="updated_preview_img/githubstat.svg" width="700" height="450">
+```
+
+Link to the bot <a href="/.github/workflows/update_image.yml">.github/workflows/update_image.yml</a>
 
 <br>
 
@@ -40,13 +52,13 @@ python run.py
 
 **img** <a href="https://github.com/kritserv/neoflask/tree/main/code/app/frontend/display_image">available image</a> (use octocat as default image)
 
-**main_col** <a href="#Color_palette">available color name</a> (use lightgreen as default main color)
+**main_col** <a href="#Color_palette">available color name </a> (use lightgreen as default main color)
 
-**second_col** <a href="#Color_palette">available color name</a> (default secondary color depends on theme (dark or light))
+**second_col** <a href="#Color_palette">available color name </a> (default secondary color depends on theme (dark or light))
 
-**bg_col** <a href="#Color_palette">available color name</a> (default background color depends on theme (dark or light))
+**bg_col** <a href="#Color_palette">available color name </a> (default background color depends on theme (dark or light))
 
-**font** <a href="#Fonts">available font name</a> (use arial as default)
+**font** <a href="#Fonts">available font name </a> (use arial as default)
 
 <br>
 
