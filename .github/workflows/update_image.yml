@@ -14,7 +14,7 @@ jobs:
 
     - name: Download image
       run: |
-        curl https://neoflask.pythonanywhere.com/?username=kritserv&img=flask&main_col=cyan&theme=solarized -o updated_preview_img/githubstat.svg
+        curl "https://neoflask.pythonanywhere.com/?username=kritserv&img=flask&main_col=cyan&theme=solarized" -o updated_preview_img/githubstat.svg
 
     - name: Commit and push if it changed
       run: |
