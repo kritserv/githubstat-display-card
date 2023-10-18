@@ -18,6 +18,10 @@ To ensure your `githubstat` is updated correctly, consider using a bot that auto
 
 Link to the bot <a href="/.github/workflows/update_image.yml">.github/workflows/update_image.yml</a>
 
+#### Settings > Actions > General > (Scroll down to bottom) > Workflow permissions > Read and write permissions > save
+
+You also need to do this in the repo settings to allow bot to commit.
+
 <br>
 
 # Neoflask 
