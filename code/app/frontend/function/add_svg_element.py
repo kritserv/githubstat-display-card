@@ -21,16 +21,16 @@ def AddCss(css, dwg):
 		CSS = """.blink {animation: blink 1s steps(2, start) infinite;} 
 		@keyframes blink { to { visibility: hidden;}}
 		.frame1, .frame2, .frame3, .frame4, .frame5, .frame6, .frame7, .frame8, .frame9, .frame0 {position: absolute;}
-		.frame1 {animation: f1 3s; animation-iteration-count: infinite;}
-		.frame2 {animation: f2 3s; animation-iteration-count: infinite;}
-		.frame3 {animation: f3 3s; animation-iteration-count: infinite;}
-		.frame4 {animation: f4 3s; animation-iteration-count: infinite;}
-		.frame5 {animation: f5 3s; animation-iteration-count: infinite;}
-		.frame6 {animation: f6 3s; animation-iteration-count: infinite;}
-		.frame7 {animation: f7 3s; animation-iteration-count: infinite;}
-		.frame8 {animation: f8 3s; animation-iteration-count: infinite;}
-		.frame9 {animation: f9 3s; animation-iteration-count: infinite;}
-		.frame0 {animation: f0 3s; animation-iteration-count: infinite;}
+		.frame1 {animation: f1 1s; animation-iteration-count: infinite;}
+		.frame2 {animation: f2 1s; animation-iteration-count: infinite;}
+		.frame3 {animation: f3 1s; animation-iteration-count: infinite;}
+		.frame4 {animation: f4 1s; animation-iteration-count: infinite;}
+		.frame5 {animation: f5 1s; animation-iteration-count: infinite;}
+		.frame6 {animation: f6 1s; animation-iteration-count: infinite;}
+		.frame7 {animation: f7 1s; animation-iteration-count: infinite;}
+		.frame8 {animation: f8 1s; animation-iteration-count: infinite;}
+		.frame9 {animation: f9 1s; animation-iteration-count: infinite;}
+		.frame0 {animation: f0 1s; animation-iteration-count: infinite;}
 		@keyframes f1 {from {visibility: visible;}5% {visibility: hidden;}10% {visibility: hidden;}15% {visibility: hidden;}20% {visibility: hidden;}25% {visibility: hidden;}30% {visibility: hidden;}35% {visibility: hidden;}40% {visibility: hidden;}45% {visibility: hidden;}50% {visibility: hidden;}55% {visibility: hidden;}60% {visibility: hidden;}65% {visibility: hidden;}70% {visibility: hidden;}75% {visibility: hidden;}80% {visibility: hidden;}85% {visibility: hidden;}90% {visibility: hidden;}95% {visibility: hidden;}to {visibility: visible;}}
 		@keyframes f2 {from {visibility: hidden;}5% {visibility: hidden;}10% {visibility: visible;}15% {visibility: hidden;}20% {visibility: hidden;}25% {visibility: hidden;}30% {visibility: hidden;}35% {visibility: hidden;}40% {visibility: hidden;}45% {visibility: hidden;}50% {visibility: hidden;}55% {visibility: hidden;}60% {visibility: hidden;}65% {visibility: hidden;}70% {visibility: hidden;}75% {visibility: hidden;}80% {visibility: hidden;}85% {visibility: hidden;}90% {visibility: hidden;}95% {visibility: hidden;}100% {visibility: hidden;}}
 		@keyframes f3 {from {visibility: hidden;}5% {visibility: hidden;}10% {visibility: hidden;}15% {visibility: hidden;}20% {visibility: visible;}25% {visibility: hidden;}30% {visibility: hidden;}35% {visibility: hidden;}40% {visibility: hidden;}45% {visibility: hidden;}50% {visibility: hidden;}55% {visibility: hidden;}60% {visibility: hidden;}65% {visibility: hidden;}70% {visibility: hidden;}75% {visibility: hidden;}80% {visibility: hidden;}85% {visibility: hidden;}90% {visibility: hidden;}95% {visibility: hidden;}100% {visibility: hidden;}}
