@@ -38,7 +38,7 @@ def DrawSvg(context):
 	try:
 		used_font = context['use_font']
 	except:
-		return {'username': context['username'], 'font': used_font, 'message': 'font does not exist'}, 201
+		return {'username': context['username'], 'font': context['use_font'], 'message': 'font does not exist'}, 201
 
 	AddRect((0, 0), ('100%', '100%'), bg_col, dwg)
 
