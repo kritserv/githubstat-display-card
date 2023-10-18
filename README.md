@@ -1,4 +1,8 @@
+<center>
+
 <img src="updated_preview_img/githubstat.svg" width="700" height="450">
+
+</center>
 
 ```
 <img src="https://neoflask.pythonanywhere.com/?username=kritserv&img=flask&main_col=cyan&theme=solarized" width="700" height="450">
@@ -6,7 +10,7 @@
 
 ## ⚠️ Caution
 
-When you put the above code on README file, it may not update your `githubstat` as expected. This is because the NeoFlask web app is programmed to update user stats daily, but GitHub uses a cached (camo) version of the image instead of fetching the image from the original source.
+When you put the above code on README file, it may not update your `githubstat` as expected. This is because the Neoflask web app is programmed to update user stats daily, but GitHub uses a cached (camo) version of the image instead of fetching the image from the original source.
 
 ## Recommended Approach
 
@@ -45,6 +49,10 @@ cd neoflask/code && pip install -r requirements.txt
 ```
 python run.py
 ```
+
+<br>
+
+<img src="showcase/example_for_readme.svg" width="700" height="450">
 
 <br>
 
