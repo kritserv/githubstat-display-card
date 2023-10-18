@@ -1,14 +1,10 @@
-<center>
-
 <img src="updated_preview_img/githubstat.svg" width="700" height="450">
-
-</center>
 
 ```
 <img src="https://neoflask.pythonanywhere.com/?username=kritserv&img=flask&main_col=cyan&theme=solarized" width="700" height="450">
 ```
 
-## ⚠️ Caution
+# ⚠️ Caution
 
 When you put the above code on README file, it may not update your `githubstat` as expected. This is because the Neoflask web app is programmed to update user stats daily, but GitHub uses a cached (camo) version of the image instead of fetching the image from the original source.
 
@@ -24,7 +20,7 @@ Link to the bot <a href="/.github/workflows/update_image.yml">.github/workflows/
 
 #### Settings > Actions > General > (Scroll down to bottom) > Workflow permissions > Read and write permissions > save
 
-You also need to do this in the repo settings to allow bot to commit.
+> You also need to do this in the repo settings to give bot a commit permission.
 
 <br>
 
