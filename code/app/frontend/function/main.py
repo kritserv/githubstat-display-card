@@ -40,6 +40,11 @@ def DrawSvg(context):
 	except:
 		return {'username': context['username'], 'font': context['use_font'], 'message': 'font does not exist'}, 201
 
+	try:
+	    pc_name = context['pc_name']
+	except:
+	    return {'username': context['username'], 'pc_name': context['pc_name'], 'message': 'cannot use this word'}, 201
+
 	AddRect((0, 0), ('100%', '100%'), bg_col, dwg)
 
 	try:
@@ -61,10 +66,10 @@ def DrawSvg(context):
 
 	AddTxt(context['username'], (x_pos, 20), (main_col, 'bold'), dwg, used_font)
 	AddTxt('@', (x_pos+TxtWidth(context['username'], used_font), 20), (second_col, 'normal'), dwg, used_font)
-	AddTxt('githubstat', (x_pos+TxtWidth(context['username']+'@', used_font), 20), (main_col, 'bold'), dwg, used_font)
+	AddTxt(context['pc_name'], (x_pos+TxtWidth(context['username']+'@', used_font), 20), (main_col, 'bold'), dwg, used_font)
 
 	line = ''
-	while TxtWidth(line, used_font) < TxtWidth(f"{context['username']}@githubstat", used_font)+20:
+	while TxtWidth(line, used_font) < TxtWidth(f"{context['username']}@{context['pc_name']}", used_font)+20:
 		line += '_ '
 
 	AddTxt(line, (x_pos, 50), (second_col, 'normal'), dwg, used_font)
@@ -104,10 +109,10 @@ def DrawSvg(context):
 	y_pos += 50
 	AddTxt(context['username'], (10, y_pos), (main_col, 'bold'), dwg, used_font)
 	AddTxt('@', (10+TxtWidth(context['username'], used_font), y_pos), (second_col, 'normal'), dwg, used_font)
-	AddTxt('githubstat:', (10+TxtWidth(context['username']+'@', used_font), y_pos), (main_col, 'bold'), dwg, used_font)
-	AddTxt('~$', (10+TxtWidth(f"{context['username']}@githubstat:", used_font), y_pos), (second_col, 'bold'), dwg, used_font)
+	AddTxt(context['pc_name'], (10+TxtWidth(context['username']+'@', used_font), y_pos), (main_col, 'bold'), dwg, used_font)
+	AddTxt('~$', (10+TxtWidth(f"{context['username']}@{context['pc_name']}:", used_font), y_pos), (second_col, 'bold'), dwg, used_font)
 
-	blinktxt = dwg.text('|', insert=(10+TxtWidth(f"{context['username']}@githubstat:~$  ", used_font), y_pos), fill=main_col, font_weight='bold', font_family=used_font, class_='blink')
+	blinktxt = dwg.text('|', insert=(10+TxtWidth(f"{context['username']}@{context['pc_name']}:~$  ", used_font), y_pos), fill=main_col, font_weight='bold', font_family=used_font, class_='blink')
 	dwg.add(blinktxt)
 
 	if need_animate_css == True:

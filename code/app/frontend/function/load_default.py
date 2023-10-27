@@ -1,4 +1,4 @@
-def UseDefaultValue(theme, bg_col, main_col, second_col, img, use_font):
+def UseDefaultValue(theme, bg_col, main_col, second_col, img, use_font, pc_name):
 
 	if theme == None:
 		theme = "gnome_dark"
@@ -27,4 +27,7 @@ def UseDefaultValue(theme, bg_col, main_col, second_col, img, use_font):
 	if use_font == None:
 		use_font = "arial"
 
-	return theme, bg_col, main_col, second_col, img, use_font
+	if pc_name == None:
+	    pc_name = "githubstat"
+
+	return theme, bg_col, main_col, second_col, img, use_font, pc_name
