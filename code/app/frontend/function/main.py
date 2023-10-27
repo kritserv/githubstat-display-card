@@ -109,7 +109,7 @@ def DrawSvg(context):
 	y_pos += 50
 	AddTxt(context['username'], (10, y_pos), (main_col, 'bold'), dwg, used_font)
 	AddTxt('@', (10+TxtWidth(context['username'], used_font), y_pos), (second_col, 'normal'), dwg, used_font)
-	AddTxt(context['pc_name'], (10+TxtWidth(context['username']+'@', used_font), y_pos), (main_col, 'bold'), dwg, used_font)
+	AddTxt(context['pc_name']+':', (10+TxtWidth(context['username']+'@', used_font), y_pos), (main_col, 'bold'), dwg, used_font)
 	AddTxt('~$', (10+TxtWidth(f"{context['username']}@{context['pc_name']}:", used_font), y_pos), (second_col, 'bold'), dwg, used_font)
 
 	blinktxt = dwg.text('|', insert=(10+TxtWidth(f"{context['username']}@{context['pc_name']}:~$  ", used_font), y_pos), fill=main_col, font_weight='bold', font_family=used_font, class_='blink')
