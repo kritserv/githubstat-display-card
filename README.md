@@ -74,7 +74,7 @@ python run.py
 
 **bg_col** <a href="#Color_palette">available color name </a> (default background color depends on theme (dark or light))
 
-**font** <a href="#Fonts">available font name </a> (use arial as default)
+**font** <a href="#Fonts">available font name </a> (use arial as default font)
 
 <br>
 
