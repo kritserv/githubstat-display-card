@@ -1,3 +1,15 @@
+# Neoflask 
+
+Neoflask is a Github stat card that can be added to a profile’s markdown file. It is inspired by neofetch and built with Flask.
+
+<br>
+
+## Contribution
+
+There are no rules, just make sure to describe what you contribute clearly. As long as this project improves, I’ll accept it. Also, be nice.
+
+<br>
+
 <img src="updated_preview_img/githubstat.svg" width="700" height="450">
 
 ```
@@ -21,12 +33,6 @@ Link to the bot <a href="/.github/workflows/update_image.yml">.github/workflows/
 #### Settings > Actions > General > (Scroll down to bottom) > Workflow permissions > Read and write permissions > save
 
 > You also need to do this in the repo settings to give bot a commit permission.
-
-<br>
-
-# Neoflask 
-
-Neoflask is a Github stat card that can be added to a profile’s markdown file. It is inspired by neofetch and built with Flask.
 
 <br>
 
@@ -56,6 +62,8 @@ python run.py
 
 **username** <u>use your github username</u>
 
+**pc_name** <u>choose any word you want to display after username (use githubstat as default pc name)</u>
+
 **theme** <a href="https://github.com/kritserv/neoflask/tree/main/code/app/frontend/theme">available theme</a> (use gnome_dark as default theme)
 
 **img** <a href="https://github.com/kritserv/neoflask/tree/main/code/app/frontend/display_image">available image</a> (use octocat as default image)
@@ -67,12 +75,6 @@ python run.py
 **bg_col** <a href="#Color_palette">available color name </a> (default background color depends on theme (dark or light))
 
 **font** <a href="#Fonts">available font name </a> (use arial as default)
-
-<br>
-
-## Contribution
-
-There are no rules, just make sure to describe what you contribute clearly. As long as this project improves, I’ll accept it. Also, be nice.
 
 <br>
 
