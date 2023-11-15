@@ -1,3 +1,5 @@
+<img src="githubstat_card.svg" height="500" width="750">
+
 # Githubstat Display Card 
 
 Githubstat Display Card is a Github stat card that can be added to a profile’s markdown file. It is inspired by neofetch and built with svgwrite.
@@ -28,4 +30,10 @@ git clone https://github.com/kritserv/githubstat-display-card.git
 
 ```
 cd githubstat-display-card/code && pip install -r requirements.txt
+```
+
+## Run Command
+
+```
+py code/script.py
 ```
