@@ -228,9 +228,9 @@ result = DrawSvg(result_context, col['black'], col['cyan'], col['white'], col, 7
 # add terminal transparency
 result = result.replace('></rect>', ' fill-opacity="0.95"></rect>')
 # add background image
-result = result.replace('</defs>','</defs><image href="https://raw.githubusercontent.com/kritserv/githubstat-display-card/main/code/img/bg_image.jpg" height="500" x="0" y="0"/>')
+result = result.replace('</defs>','</defs><image href="code/img/bg_image.png" height="500" x="0" y="0"/>')
 # add foreground image
-result = result.replace('</rect><text','</rect><image href="https://raw.githubusercontent.com/kritserv/githubstat-display-card/main/code/img/fg_image.jpg" height="330" x="40" y="20"/><text')
+result = result.replace('</rect><text','</rect><image href="code/img/fg_image.png" height="330" x="40" y="20"/><text')
 
 with open('githubstat_card.svg', 'w') as f:
     f.write(result)
