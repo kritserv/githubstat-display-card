@@ -2,7 +2,7 @@ name: Update Preview Image
 
 on:
   schedule:
-    - cron:  '0 2 * * *'  # Runs every day at 2 AM UTC (which is 9 AM Bangkok time)
+    - cron:  '0 2 * * 0' # Runs every Sunday at 2 AM UTC
 
 jobs:
   update:
