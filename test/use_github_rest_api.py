@@ -5,7 +5,7 @@ from datetime import date
 username = "kritserv"
 
 session = requests.Session()
-#session.headers.update({"Authorization": "kritserv {token}"})
+#session.headers.update({"Authorization": "token {token}"})
 response = session.get("https://api.github.com/users/"+username)
 print(response)
 profile_data = response.json()
@@ -56,19 +56,15 @@ for key, val in language_counter.items():
     language_percentage[key] = pct
 
 sorted_language_by_percentage = sorted(language_percentage.items(), key=lambda item: item[1])
-print(sorted_language_by_percentage)
+sorted_language_by_percentage = sorted_language_by_percentage[::-1]
 
 sorted_language_by_percentage = str(sorted_language_by_percentage)
-print(sorted_language_by_percentage)
 
 sorted_language_by_percentage = sorted_language_by_percentage.replace("[(","{")
-print(sorted_language_by_percentage)
-sorted_language_by_percentage = sorted_language_by_percentage.replace(")]","}")
-print(sorted_language_by_percentage)
-sorted_language_by_percentage = sorted_language_by_percentage.replace("',","': '")
-print(sorted_language_by_percentage)
+sorted_language_by_percentage = sorted_language_by_percentage.replace(")]","'}")
+sorted_language_by_percentage = sorted_language_by_percentage.replace("',","':'")
 sorted_language_by_percentage = sorted_language_by_percentage.replace(")","'")
-print(sorted_language_by_percentage)
+sorted_language_by_percentage = sorted_language_by_percentage.replace("(","")
 
 print(username)
 print(followers_count)
