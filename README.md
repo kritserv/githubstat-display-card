@@ -1,18 +1,13 @@
-<img src="githubstat_card.svg" height="500" width="750">
+<img src="githubstat_card.png">
 
-background image: <a href="https://unsplash.com/photos/a-dirt-road-with-trees-and-mountains-in-the-background-WaV9tvDJIC0">unspash link</a>
-
-> by <a href="https://unsplash.com/@lureofadventure">Ali Kazal</a>
-
-foreground image: <a href="https://unsplash.com/photos/siamese-cat-KGiQFgF7dkc">unsplash link</a>
-
-> by <a href="https://unsplash.com/@alexmeier19">Alex Meier</a>
+background image: <a href="https://unsplash.com/photos/two-tents-set-up-in-the-desert-under-a-night-sky-yUcH008GS6A">unspash link</a>
+foreground image: Octocat
 
 <br>
 
 # Githubstat Display Card 
 
-Githubstat Display Card is a Github stat card that can be added to a profile’s markdown file. It is inspired by neofetch and built with svgwrite.
+Githubstat Display Card is a Github stat card that can be added to a profile’s markdown file. It is inspired by neofetch and built with Python Pillow.
 
 <br>
 
