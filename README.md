@@ -1,8 +1,11 @@
+<div align="center">
 <img src="githubstat_card.png">
 
 background image: <a href="https://unsplash.com/photos/two-tents-set-up-in-the-desert-under-a-night-sky-yUcH008GS6A">unspash link</a>
+
 foreground image: Octocat
 
+</div>
 <br>
 
 # Githubstat Display Card 
