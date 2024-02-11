@@ -161,8 +161,8 @@ if __name__ == "__main__":
     except:
         pass
 
-    background = Image.open('wallpaper.jpg')
-    foreground = Image.open('octocat.png')
+    background = Image.open('code/wallpaper.jpg')
+    foreground = Image.open('code/octocat.png')
 
     card = CreateCard(data = GetData(username, session), pc_name = "GitHub", color_dict = col, main_color = "cyan", terminal_opacity = 225)
     new_card = AddBackgroundAndForeground(background, foreground, card)
