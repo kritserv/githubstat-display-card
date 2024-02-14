@@ -3,7 +3,27 @@ import requests
 from datetime import date
 from collections import Counter
 
-def GetData(username, session):
+def get_data(username, session):
+    """Fetches and returns data about a GitHub user and their repositories.
+
+    Parameters:
+    username (str): The GitHub username to fetch data for.
+    session (requests.Session): The session to use for making HTTP requests.
+
+    Returns:
+    list: A list containing the following data in order:
+        - The username (str)
+        - The follower count (str), formatted as 'xk' if over 999
+        - The total star count of all repositories (str), formatted as 'xk' if over 999
+        - A list of tuples, each containing a language (str) and its usage percentage (float),
+          sorted in descending order of percentage.
+
+    The function makes GET requests to the GitHub API to fetch profile data and repository data.
+    It handles pagination for the repository data by fetching up to 100 repositories sorted by last updated.
+    It also fetches language data for each repository and calculates the usage percentage of each language.
+
+    If any of the GET requests fail, an error message is printed with the status code.
+    """
 
     return_data = [username]
     response = session.get("https://api.github.com/users/"+username)
@@ -85,7 +105,25 @@ col = {
 	"white":"#FFFFFF"
 }
 
-def CreateCard(data, pc_name = "gh", color_dict = col, main_color = "cyan", terminal_opacity = 255, max_show_language = 5):
+def create_card(data, pc_name = "gh", color_dict = col, main_color = "cyan", terminal_opacity = 255, max_show_language = 5):
+    """Creates an image card with GitHub user data and returns it.
+
+    Parameters:
+    data (list): A list containing the following data in order:
+        - The username (str)
+        - The follower count (str), formatted as "xk" if over 999
+        - The total star count of all repositories (str), formatted as "xk" if over 999
+        - A list of tuples, each containing a language (str) and its usage percentage (float),
+          sorted in descending order of percentage.
+    pc_name (str, optional): The name to display before the '@' symbol. Defaults to "gh".
+    color_dict (dict, optional): A dictionary mapping color names to their hex values. Defaults to "col".
+    main_color (str, optional): The main color to use for text. Defaults to "cyan".
+    terminal_opacity (int, optional): The opacity of the terminal background. Defaults to 255.
+    max_show_language (int, optional): The maximum number of languages to display. Defaults to 5.
+
+    Returns:
+    PIL.Image.Image: An image card with the GitHub user data.
+    """
     
     username, follower_count, total_stars, sorted_language_by_percentage = data
 
@@ -144,7 +182,17 @@ def CreateCard(data, pc_name = "gh", color_dict = col, main_color = "cyan", term
     
     return base
 
-def AddBackgroundAndForeground(bg, fg, card):
+def add_background_and_foreground(bg, fg, card):
+    """Adds a background and foreground to a card image and returns the result.
+
+    Parameters:
+    bg (PIL.Image.Image): The background image.
+    fg (PIL.Image.Image): The foreground image.
+    card (PIL.Image.Image): The card image to be placed between the background and foreground.
+
+    Returns:
+    PIL.Image.Image: The resulting image after adding the background and foreground to the card.
+    """
     bg = bg.resize((450, 330))
     bg.paste(card, (5, 5), card)
     fg = fg.resize((205, 205))
@@ -164,6 +212,6 @@ if __name__ == "__main__":
     background = Image.open('code/wallpaper.jpg')
     foreground = Image.open('code/octocat.png')
 
-    card = CreateCard(data = GetData(username, session), pc_name = "GitHub", color_dict = col, main_color = "cyan", terminal_opacity = 225)
-    new_card = AddBackgroundAndForeground(background, foreground, card)
+    card = create_card(data = get_data(username, session), pc_name = "GitHub", color_dict = col, main_color = "cyan", terminal_opacity = 225)
+    new_card = add_background_and_foreground(background, foreground, card)
     new_card.save("githubstat_card.png")
