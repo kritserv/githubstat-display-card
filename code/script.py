@@ -172,12 +172,15 @@ def create_card(data, pc_name = "gh", color_dict = col, main_color = "cyan", ter
         draw.rectangle(shape_list.pop(0), fill=color_dict[color]) 
 
     draw.text((20, y+20), username+"@"+pc_name+": _", color_dict["white"], font=default)
-    draw.text((20, y+20), username+" "+pc_name, col[main_color], font=default)
+    draw.text((20, y+20), username, col[main_color], font=default)
     
     x = old_x
     y = old_y
     for line in lines:
-        draw.text((x, y), line.replace("@", " ").replace("-", "").split(":")[0], color_dict[main_color], font=default)
+        if "@" in line:
+            draw.text((x, y), line.split("@")[0], color_dict[main_color], font=default)
+        else:
+            draw.text((x, y), line.replace("-", "").split(":")[0], color_dict[main_color], font=default)
         y += 20
     
     return base
