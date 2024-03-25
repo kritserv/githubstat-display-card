@@ -45,8 +45,9 @@ def get_data(username, session):
         all_languages_urls = []
         
         for repo_data in response.json():
-            all_languages_urls.append(repo_data["languages_url"])
-            total_stars += repo_data["stargazers_count"]
+            if not repo_data["fork"]:
+                all_languages_urls.append(repo_data["languages_url"])
+                total_stars += repo_data["stargazers_count"]
             
         if total_stars > 999:
             total_stars = str(round(total_stars / 1000, 2)) + "k"
